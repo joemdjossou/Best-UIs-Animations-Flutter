@@ -6,7 +6,7 @@ class SliderView extends StatefulWidget {
   final Function(double) onChnagedistValue;
   final double distValue;
 
-  const SliderView({Key key, this.onChnagedistValue, this.distValue}) : super(key: key);
+  const SliderView({Key? key, required this.onChnagedistValue, required this.distValue}) : super(key: key);
   @override
   _SliderViewState createState() => _SliderViewState();
 }
@@ -89,19 +89,21 @@ class CustomThumbShape extends SliderComponentShape {
   void paint(
     PaintingContext context,
     Offset thumbCenter, {
-    Animation<double> activationAnimation,
-    Animation<double> enableAnimation,
-    bool isDiscrete,
-    TextPainter labelPainter,
-    RenderBox parentBox,
-    SliderThemeData sliderTheme,
-    TextDirection textDirection,
-    double value,
+    Animation<double>? activationAnimation,
+    Animation<double>? enableAnimation,
+    bool? isDiscrete,
+    TextPainter? labelPainter,
+    RenderBox? parentBox,
+    Size? sizeWithOverflow,
+    double? textScaleFactor,
+    SliderThemeData? sliderTheme,
+    TextDirection? textDirection,
+    double? value,
   }) {
     final Canvas canvas = context.canvas;
     final ColorTween colorTween = ColorTween(
-      begin: sliderTheme.disabledThumbColor,
-      end: sliderTheme.thumbColor,
+      begin: sliderTheme?.disabledThumbColor,
+      end: sliderTheme?.thumbColor,
     );
     canvas.drawPath(
         Path()
@@ -115,7 +117,7 @@ class CustomThumbShape extends SliderComponentShape {
     cPaint..color = Colors.white;
     cPaint..strokeWidth = 14 / 2;
     canvas.drawCircle(Offset(thumbCenter.dx, thumbCenter.dy), 12, cPaint);
-    cPaint..color = colorTween.evaluate(enableAnimation);
+    cPaint..color = colorTween.evaluate(enableAnimation!)!;
     canvas.drawCircle(Offset(thumbCenter.dx, thumbCenter.dy), 10, cPaint);
   }
 

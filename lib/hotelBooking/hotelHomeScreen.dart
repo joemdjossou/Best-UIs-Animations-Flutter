@@ -14,7 +14,7 @@ class HotelHomeScreen extends StatefulWidget {
 }
 
 class _HotelHomeScreenState extends State<HotelHomeScreen> with TickerProviderStateMixin {
-  AnimationController animationController;
+  late AnimationController animationController;
   var hotelList = HotelListData.hotelList;
   ScrollController _scrollController = new ScrollController();
 
@@ -82,7 +82,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen> with TickerProviderSt
                           ];
                         },
                         body: Container(
-                          color: HotelAppTheme.buildLightTheme().backgroundColor,
+                          color: HotelAppTheme.buildLightTheme().colorScheme.background,
                           child: ListView.builder(
                             itemCount: hotelList.length,
                             padding: EdgeInsets.only(top: 8),
@@ -116,7 +116,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen> with TickerProviderSt
   Widget getListUI() {
     return Container(
       decoration: BoxDecoration(
-        color: HotelAppTheme.buildLightTheme().backgroundColor,
+        color: HotelAppTheme.buildLightTheme().colorScheme.background,
         boxShadow: <BoxShadow>[
           BoxShadow(color: Colors.grey.withOpacity(0.2), offset: Offset(0, -2), blurRadius: 8.0),
         ],
@@ -158,7 +158,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen> with TickerProviderSt
   }
 
   Widget getHotelViewList() {
-    List<Widget> hotelListViews = List<Widget>();
+    List<Widget> hotelListViews = <Widget>[];
     for (var i = 0; i < hotelList.length; i++) {
       var count = hotelList.length;
       var animation = Tween(begin: 0.0, end: 1.0).animate(
@@ -302,7 +302,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen> with TickerProviderSt
               padding: const EdgeInsets.only(right: 16, top: 8, bottom: 8),
               child: Container(
                 decoration: BoxDecoration(
-                  color: HotelAppTheme.buildLightTheme().backgroundColor,
+                  color: HotelAppTheme.buildLightTheme().colorScheme.background,
                   borderRadius: BorderRadius.all(
                     Radius.circular(38.0),
                   ),
@@ -348,7 +348,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen> with TickerProviderSt
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Icon(FontAwesomeIcons.search, size: 20, color: HotelAppTheme.buildLightTheme().backgroundColor),
+                  child: Icon(FontAwesomeIcons.magnifyingGlass, size: 20, color: HotelAppTheme.buildLightTheme().colorScheme.background),
                 ),
               ),
             ),
@@ -368,7 +368,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen> with TickerProviderSt
           child: Container(
             height: 24,
             decoration: BoxDecoration(
-              color: HotelAppTheme.buildLightTheme().backgroundColor,
+              color: HotelAppTheme.buildLightTheme().colorScheme.background,
               boxShadow: <BoxShadow>[
                 BoxShadow(color: Colors.grey.withOpacity(0.2), offset: Offset(0, -2), blurRadius: 8.0),
               ],
@@ -376,7 +376,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen> with TickerProviderSt
           ),
         ),
         Container(
-          color: HotelAppTheme.buildLightTheme().backgroundColor,
+          color: HotelAppTheme.buildLightTheme().colorScheme.background,
           child: Padding(
             padding: const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 4),
             child: Row(
@@ -446,22 +446,20 @@ class _HotelHomeScreenState extends State<HotelHomeScreen> with TickerProviderSt
     );
   }
 
-  void showDemoDialog({BuildContext context}) {
+  void showDemoDialog({BuildContext? context}) {
     showDialog(
-      context: context,
+      context: context!,
       builder: (BuildContext context) => CalendarPopupView(
         barrierDismissible: true,
          minimumDate: DateTime.now(),
-        //  maximumDate: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 10),
+        maximumDate: DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day + 10),
         initialEndDate: endDate,
         initialStartDate: startDate,
         onApplyClick: (DateTime startData, DateTime endData) {
           setState(() {
-            if (startData != null && endData != null) {
-              startDate = startData;
-              endDate = endData;
-            }
-          });
+            startDate = startData;
+            endDate = endData;
+                    });
         },
         onCancelClick: () {},
       ),
@@ -471,7 +469,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen> with TickerProviderSt
   Widget getAppBarUI() {
     return Container(
       decoration: BoxDecoration(
-        color: HotelAppTheme.buildLightTheme().backgroundColor,
+        color: HotelAppTheme.buildLightTheme().colorScheme.background,
         boxShadow: <BoxShadow>[
           BoxShadow(color: Colors.grey.withOpacity(0.2), offset: Offset(0, 2), blurRadius: 8.0),
         ],
@@ -540,7 +538,7 @@ class _HotelHomeScreenState extends State<HotelHomeScreen> with TickerProviderSt
                       onTap: () {},
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Icon(FontAwesomeIcons.mapMarkerAlt),
+                        child: Icon(FontAwesomeIcons.locationDot),
                       ),
                     ),
                   ),

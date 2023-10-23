@@ -13,15 +13,15 @@ class DrawerUserController extends StatefulWidget {
   final DrawerIndex screenIndex;
 
   const DrawerUserController({
-    Key key,
-    this.drawerWidth: 250,
-    this.onDrawerCall,
-    this.screenView,
-    this.animationController,
-    this.animatedIconData: AnimatedIcons.arrow_menu,
-    this.menuView,
-    this.drawerIsOpen,
-    this.screenIndex,
+    Key? key,
+    this.drawerWidth= 250,
+    required this.onDrawerCall,
+    required this.screenView,
+    required this.animationController,
+    this.animatedIconData= AnimatedIcons.arrow_menu,
+    required this.menuView,
+    required this.drawerIsOpen,
+    required this.screenIndex,
   }) : super(key: key);
   @override
   _DrawerUserControllerState createState() => _DrawerUserControllerState();
@@ -29,9 +29,9 @@ class DrawerUserController extends StatefulWidget {
 
 class _DrawerUserControllerState extends State<DrawerUserController>
     with TickerProviderStateMixin {
-  ScrollController scrollController;
-  AnimationController iconAnimationController;
-  AnimationController animationController;
+  late ScrollController scrollController;
+  late AnimationController iconAnimationController;
+  late AnimationController animationController;
 
   double scrolloffset = 0.0;
   bool isSetDawer = false;
@@ -120,7 +120,7 @@ class _DrawerUserControllerState extends State<DrawerUserController>
                   height: MediaQuery.of(context).size.height,
                   child: AnimatedBuilder(
                     animation: iconAnimationController,
-                    builder: (BuildContext context, Widget child) {
+                    builder: (BuildContext context, Widget? child) {
                       return new Transform(
                         transform: new Matrix4.translationValues(
                             scrollController.offset, 0.0, 0.0),
@@ -128,9 +128,7 @@ class _DrawerUserControllerState extends State<DrawerUserController>
                           height: MediaQuery.of(context).size.height,
                           width: widget.drawerWidth,
                           child: HomeDrawer(
-                            screenIndex: widget.screenIndex == null
-                                ? DrawerIndex.HOME
-                                : widget.screenIndex,
+                            screenIndex: widget.screenIndex,
                             iconAnimationController: iconAnimationController,
                             callBackIndex: (DrawerIndex indexType) {
                               onDrawerClick();
@@ -160,11 +158,7 @@ class _DrawerUserControllerState extends State<DrawerUserController>
                       children: <Widget>[
                         IgnorePointer(
                           ignoring: scrolloffset == 1 ? true : false,
-                          child: widget.screenView == null
-                              ? Container(
-                                  color: Colors.white,
-                                )
-                              : widget.screenView,
+                          child: widget.screenView,
                         ),
                         scrolloffset == 1.0
                             ? InkWell(
@@ -186,12 +180,8 @@ class _DrawerUserControllerState extends State<DrawerUserController>
                                 borderRadius: new BorderRadius.circular(
                                     AppBar().preferredSize.height),
                                 child: Center(
-                                  child: widget.menuView != null
-                                      ? widget.menuView
-                                      : AnimatedIcon(
-                                          icon: widget.animatedIconData != null
-                                              ? widget.animatedIconData
-                                              : AnimatedIcons.arrow_menu,
+                                  child: AnimatedIcon(
+                                          icon: AnimatedIcons.arrow_menu,
                                           progress: iconAnimationController),
                                 ),
                                 onTap: () {

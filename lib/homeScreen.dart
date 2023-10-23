@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'model/homelist.dart';
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
+  MyHomePage({Key? key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -11,7 +11,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   List<HomeList> homeList = HomeList.homeList;
-  AnimationController animationController;
+  AnimationController? animationController;
   bool multiple = true;
 
   @override
@@ -28,7 +28,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   @override
   void dispose() {
-    animationController.dispose();
+    animationController?.dispose();
     super.dispose();
   }
 
@@ -68,15 +68,15 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                                 var animation =
                                     Tween(begin: 0.0, end: 1.0).animate(
                                   CurvedAnimation(
-                                    parent: animationController,
+                                    parent: animationController!,
                                     curve: Interval((1 / count) * index, 1.0,
                                         curve: Curves.fastOutSlowIn),
                                   ),
                                 );
-                                animationController.forward();
+                                animationController?.forward();
                                 return HomeListView(
                                   animation: animation,
-                                  animationController: animationController,
+                                  animationController: animationController!,
                                   listData: homeList[index],
                                   callBack: () {
                                     Navigator.push(
@@ -173,20 +173,20 @@ class HomeListView extends StatelessWidget {
   final HomeList listData;
   final VoidCallback callBack;
   final AnimationController animationController;
-  final Animation animation;
+  final Animation<double> animation;
 
   const HomeListView(
-      {Key key,
-      this.listData,
-      this.callBack,
-      this.animationController,
-      this.animation})
+      {Key? key,
+      required this.listData,
+      required this.callBack,
+      required this.animationController,
+      required this.animation})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: animationController,
-      builder: (BuildContext context, Widget child) {
+      builder: (BuildContext context, Widget? child) {
         return FadeTransition(
           opacity: animation,
           child: new Transform(

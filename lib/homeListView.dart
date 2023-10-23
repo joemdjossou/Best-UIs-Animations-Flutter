@@ -5,20 +5,20 @@ class HomeListView extends StatelessWidget {
   final HomeList listData;
   final VoidCallback callBack;
   final AnimationController animationController;
-  final Animation animation;
+  final Animation<double> animation;
 
   const HomeListView(
-      {Key key,
-      this.listData,
-      this.callBack,
-      this.animationController,
-      this.animation})
+      {required Key key,
+      required this.listData,
+      required this.callBack,
+      required this.animationController,
+      required this.animation})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: animationController,
-      builder: (BuildContext context, Widget child) {
+      builder: (BuildContext context, Widget? child) {
         return FadeTransition(
           opacity: animation,
           child: new Transform(

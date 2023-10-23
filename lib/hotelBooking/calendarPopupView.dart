@@ -16,34 +16,30 @@ class CalendarPopupView extends StatefulWidget {
   final Function onCancelClick;
 
   const CalendarPopupView(
-      {Key key,
-      this.initialStartDate,
-      this.initialEndDate,
-      this.onApplyClick,
-      this.onCancelClick,
+      {Key? key,
+      required this.initialStartDate,
+      required this.initialEndDate,
+      required this.onApplyClick,
+      required this.onCancelClick,
       this.barrierDismissible = true,
-      this.minimumDate,
-      this.maximumDate})
+      required this.minimumDate,
+      required this.maximumDate})
       : super(key: key);
   @override
   _CalendarPopupViewState createState() => _CalendarPopupViewState();
 }
 
 class _CalendarPopupViewState extends State<CalendarPopupView> with TickerProviderStateMixin {
-  AnimationController animationController;
-  DateTime startDate;
-  DateTime endDate;
+  late AnimationController animationController;
+  late DateTime startDate;
+  late DateTime endDate;
 
   @override
   void initState() {
     animationController = AnimationController(duration: Duration(milliseconds: 400), vsync: this);
-    if (widget.initialStartDate != null) {
-      startDate = widget.initialStartDate;
-    }
-    if (widget.initialEndDate != null) {
-      endDate = widget.initialEndDate;
-    }
-    animationController.forward();
+    startDate = widget.initialStartDate;
+    endDate = widget.initialEndDate;
+      animationController.forward();
     super.initState();
   }
 
@@ -60,7 +56,7 @@ class _CalendarPopupViewState extends State<CalendarPopupView> with TickerProvid
         backgroundColor: Colors.transparent,
         body: AnimatedBuilder(
           animation: animationController,
-          builder: (BuildContext context, Widget child) {
+          builder: (BuildContext context, Widget? child) {
             return AnimatedOpacity(
               duration: Duration(milliseconds: 100),
               opacity: animationController.value,
@@ -77,7 +73,7 @@ class _CalendarPopupViewState extends State<CalendarPopupView> with TickerProvid
                     padding: const EdgeInsets.all(24.0),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: HotelAppTheme.buildLightTheme().backgroundColor,
+                        color: HotelAppTheme.buildLightTheme().colorScheme.background,
                         borderRadius: BorderRadius.all(Radius.circular(24.0)),
                         boxShadow: <BoxShadow>[
                           BoxShadow(color: Colors.grey.withOpacity(0.2), offset: Offset(4, 4), blurRadius: 8.0),
@@ -107,6 +103,7 @@ class _CalendarPopupViewState extends State<CalendarPopupView> with TickerProvid
                                         height: 4,
                                       ),
                                       Text(
+                                        // ignore: unnecessary_null_comparison
                                         startDate != null ? DateFormat("EEE, dd MMM").format(startDate) : "--/-- ",
                                         style: TextStyle(
                                           fontWeight: FontWeight.bold,
@@ -134,6 +131,7 @@ class _CalendarPopupViewState extends State<CalendarPopupView> with TickerProvid
                                         height: 4,
                                       ),
                                       Text(
+                                        // ignore: unnecessary_null_comparison
                                         endDate != null ? DateFormat("EEE, dd MMM").format(endDate) : "--/-- ",
                                         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                                       ),

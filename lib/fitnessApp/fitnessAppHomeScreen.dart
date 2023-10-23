@@ -12,7 +12,7 @@ class FitnessAppHomeScreen extends StatefulWidget {
 
 class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
     with TickerProviderStateMixin {
-  AnimationController animationController;
+  AnimationController? animationController;
 
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
 
@@ -29,13 +29,13 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
 
     animationController =
         AnimationController(duration: Duration(milliseconds: 600), vsync: this);
-    tabBody = MyDiaryScreen(animationController: animationController);
+    tabBody = MyDiaryScreen(animationController: animationController!);
     super.initState();
   }
 
   @override
   void dispose() {
-    animationController.dispose();
+    animationController?.dispose();
     super.dispose();
   }
 
@@ -80,19 +80,19 @@ class _FitnessAppHomeScreenState extends State<FitnessAppHomeScreen>
           addClick: () {},
           changeIndex: (index) {
             if (index == 0 || index == 2) {
-              animationController.reverse().then((data) {
+              animationController?.reverse().then((data) {
                 if (!mounted) return;
                 setState(() {
                   tabBody =
-                      MyDiaryScreen(animationController: animationController);
+                      MyDiaryScreen(animationController: animationController!);
                 });
               });
             } else if (index == 1 || index == 3) {
-              animationController.reverse().then((data) {
+              animationController?.reverse().then((data) {
                 if (!mounted) return;
                 setState(() {
                   tabBody =
-                      TrainingScreen(animationController: animationController);
+                      TrainingScreen(animationController: animationController!);
                 });
               });
             }

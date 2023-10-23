@@ -5,14 +5,14 @@ class TabIconData {
   String selctedImagePath;
   bool isSelected;
   int index;
-  AnimationController animationController;
+  AnimationController? animationController;
 
   TabIconData({
     this.imagePath = '',
     this.index = 0,
     this.selctedImagePath = "",
     this.isSelected = false,
-    this.animationController,
+    required this.animationController,
   });
 
   static List<TabIconData> tabIconsList = [

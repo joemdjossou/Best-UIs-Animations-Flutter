@@ -5,13 +5,13 @@ class RangeSliderView extends StatefulWidget {
   final Function(RangeValues) onChnageRangeValues;
   final RangeValues values;
 
-  const RangeSliderView({Key key, this.values, this.onChnageRangeValues}) : super(key: key);
+  const RangeSliderView({Key? key, required this.values, required this.onChnageRangeValues}) : super(key: key);
   @override
   _RangeSliderViewState createState() => _RangeSliderViewState();
 }
 
 class _RangeSliderViewState extends State<RangeSliderView> {
-  RangeValues _values;
+  late RangeValues _values;
 
   @override
   void initState() {
@@ -110,22 +110,23 @@ class CustomRangeThumbShape extends RangeSliderThumbShape {
   void paint(
     PaintingContext context,
     Offset center, {
-    @required Animation<double> activationAnimation,
-    @required Animation<double> enableAnimation,
+    Animation<double>? activationAnimation,
+    Animation<double>? enableAnimation,
     bool isDiscrete = false,
     bool isEnabled = false,
-    bool isOnTop,
-    @required SliderThemeData sliderTheme,
-    TextDirection textDirection,
-    Thumb thumb,
+    bool isPressed = false,
+    bool? isOnTop,
+    SliderThemeData? sliderTheme,
+    TextDirection? textDirection,
+    Thumb? thumb,
   }) {
     final Canvas canvas = context.canvas;
     final ColorTween colorTween = ColorTween(
-      begin: sliderTheme.disabledThumbColor,
-      end: sliderTheme.thumbColor,
+      begin: sliderTheme?.disabledThumbColor,
+      end: sliderTheme?.thumbColor,
     );
 
-    final double size = _thumbSize * sizeTween.evaluate(enableAnimation);
+    final double size = _thumbSize * sizeTween.evaluate(enableAnimation!);
     Path thumbPath;
     switch (textDirection) {
       case TextDirection.rtl:
@@ -136,6 +137,8 @@ class CustomRangeThumbShape extends RangeSliderThumbShape {
           case Thumb.end:
             thumbPath = _leftTriangle(size, center);
             break;
+          case null:
+            thumbPath = _leftTriangle(size, center);
         }
         break;
       case TextDirection.ltr:
@@ -146,8 +149,13 @@ class CustomRangeThumbShape extends RangeSliderThumbShape {
           case Thumb.end:
             thumbPath = _rightTriangle(size, center);
             break;
+          case null:
+            thumbPath = _rightTriangle(size, center);
+
         }
         break;
+      case null:
+        thumbPath = _rightTriangle(size, center);
     }
 
     canvas.drawPath(
@@ -162,7 +170,7 @@ class CustomRangeThumbShape extends RangeSliderThumbShape {
     cPaint..color = Colors.white;
     cPaint..strokeWidth = 14 / 2;
     canvas.drawCircle(Offset(center.dx, center.dy), 12, cPaint);
-    cPaint..color = colorTween.evaluate(enableAnimation);
+    cPaint..color = colorTween.evaluate(enableAnimation)!;
     canvas.drawCircle(Offset(center.dx, center.dy), 10, cPaint);
     canvas.drawPath(thumbPath, Paint()..color = Colors.white);
   }

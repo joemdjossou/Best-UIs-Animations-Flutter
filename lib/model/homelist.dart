@@ -8,7 +8,7 @@ class HomeList {
   String imagePath;
 
   HomeList({
-    this.navigateScreen,
+    required this.navigateScreen,
     this.imagePath = '',
   });
 

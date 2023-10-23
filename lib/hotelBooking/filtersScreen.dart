@@ -20,7 +20,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: HotelAppTheme.buildLightTheme().backgroundColor,
+      color: HotelAppTheme.buildLightTheme().colorScheme.background,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Column(
@@ -116,7 +116,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
   }
 
   List<Widget> getAccomodationListUI() {
-    List<Widget> noList = List<Widget>();
+    List<Widget> noList = <Widget>[];
     for (var i = 0; i < accomodationListData.length; i++) {
       final date = accomodationListData[i];
       noList.add(
@@ -248,11 +248,11 @@ class _FiltersScreenState extends State<FiltersScreen> {
   }
 
   List<Widget> getPList() {
-    List<Widget> noList = List<Widget>();
+    List<Widget> noList = <Widget>[];
     var cout = 0;
     final columCount = 2;
     for (var i = 0; i < popularFilterListData.length / columCount; i++) {
-      List<Widget> listUI = List<Widget>();
+      List<Widget> listUI = <Widget>[];
       for (var i = 0; i < columCount; i++) {
         try {
           final date = popularFilterListData[cout];
@@ -334,7 +334,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
   Widget getAppBarUI() {
     return Container(
       decoration: BoxDecoration(
-        color: HotelAppTheme.buildLightTheme().backgroundColor,
+        color: HotelAppTheme.buildLightTheme().colorScheme.background,
         boxShadow: <BoxShadow>[
           BoxShadow(color: Colors.grey.withOpacity(0.2), offset: Offset(0, 2), blurRadius: 4.0),
         ],

@@ -4,10 +4,10 @@ import '../fintnessAppTheme.dart';
 
 class AreaListView extends StatefulWidget {
   final AnimationController mainScreenAnimationController;
-  final Animation mainScreenAnimation;
+  final Animation<double> mainScreenAnimation;
 
   const AreaListView(
-      {Key key, this.mainScreenAnimationController, this.mainScreenAnimation})
+      {Key? key, required this.mainScreenAnimationController, required this.mainScreenAnimation})
       : super(key: key);
   @override
   _AreaListViewState createState() => _AreaListViewState();
@@ -15,7 +15,7 @@ class AreaListView extends StatefulWidget {
 
 class _AreaListViewState extends State<AreaListView>
     with TickerProviderStateMixin {
-  AnimationController animationController;
+  late AnimationController animationController;
   List<String> areaListData = [
     "assets/fitness_app/area1.png",
     "assets/fitness_app/area2.png",
@@ -40,7 +40,7 @@ class _AreaListViewState extends State<AreaListView>
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: widget.mainScreenAnimationController,
-      builder: (BuildContext context, Widget child) {
+      builder: (BuildContext context, Widget? child) {
         return FadeTransition(
           opacity: widget.mainScreenAnimation,
           child: new Transform(
@@ -93,20 +93,20 @@ class _AreaListViewState extends State<AreaListView>
 class AreaView extends StatelessWidget {
   final String imagepath;
   final AnimationController animationController;
-  final Animation animation;
+  final Animation<double> animation;
 
   const AreaView({
-    Key key,
-    this.imagepath,
-    this.animationController,
-    this.animation,
+    Key? key,
+    required this.imagepath,
+    required this.animationController,
+    required this.animation,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: animationController,
-      builder: (BuildContext context, Widget child) {
+      builder: (BuildContext context, Widget? child) {
         return FadeTransition(
           opacity: animation,
           child: new Transform(

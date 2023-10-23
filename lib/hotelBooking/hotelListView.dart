@@ -1,7 +1,7 @@
 import 'package:best_flutter_ui_templates/hotelBooking/hotelAppTheme.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:smooth_star_rating/smooth_star_rating.dart';
+import 'package:smooth_star_rating_null_safety/smooth_star_rating_null_safety.dart';
 
 import 'model/hotelListData.dart';
 
@@ -9,15 +9,15 @@ class HotelListView extends StatelessWidget {
   final VoidCallback callback;
   final HotelListData hotelData;
   final AnimationController animationController;
-  final Animation animation;
+  final Animation<double> animation;
 
-  const HotelListView({Key key, this.hotelData, this.animationController, this.animation, this.callback}) : super(key: key);
+  const HotelListView({Key? key, required this.hotelData, required this.animationController, required this.animation, required this.callback}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: animationController,
-      builder: (BuildContext context, Widget child) {
+      builder: (BuildContext context, Widget? child) {
         return FadeTransition(
           opacity: animation,
           child: new Transform(
@@ -54,7 +54,7 @@ class HotelListView extends StatelessWidget {
                               ),
                             ),
                             Container(
-                              color: HotelAppTheme.buildLightTheme().backgroundColor,
+                              color: HotelAppTheme.buildLightTheme().colorScheme.background,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -87,7 +87,7 @@ class HotelListView extends StatelessWidget {
                                                   width: 4,
                                                 ),
                                                 Icon(
-                                                  FontAwesomeIcons.mapMarkerAlt,
+                                                  FontAwesomeIcons.locationDot,
                                                   size: 12,
                                                   color: HotelAppTheme.buildLightTheme().primaryColor,
                                                 ),

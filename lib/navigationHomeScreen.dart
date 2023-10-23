@@ -13,9 +13,9 @@ class NavigationHomeScreen extends StatefulWidget {
 }
 
 class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
-  Widget screenView;
-  DrawerIndex drawerIndex;
-  AnimationController sliderAnimationController;
+  Widget? screenView;
+  DrawerIndex? drawerIndex;
+  AnimationController? sliderAnimationController;
 
   @override
   void initState() {
@@ -34,7 +34,7 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
         child: Scaffold(
           backgroundColor: AppTheme.nearlyWhite,
           body: DrawerUserController(
-            screenIndex: drawerIndex,
+            screenIndex: drawerIndex!,
             drawerWidth: MediaQuery.of(context).size.width * 0.75,
             animationController: (AnimationController animationController) {
               sliderAnimationController = animationController;
@@ -42,7 +42,7 @@ class _NavigationHomeScreenState extends State<NavigationHomeScreen> {
             onDrawerCall: (DrawerIndex drawerIndexdata) {
               changeIndex(drawerIndexdata);
             },
-            screenView: screenView,
+            screenView: screenView!, drawerIsOpen: (bool ) {  }, menuView: widget,
           ),
         ),
       ),

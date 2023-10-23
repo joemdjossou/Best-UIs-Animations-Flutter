@@ -6,7 +6,7 @@ class HomeDrawer extends StatefulWidget {
   final DrawerIndex screenIndex;
   final Function(DrawerIndex) callBackIndex;
   HomeDrawer(
-      {Key key, this.screenIndex, this.iconAnimationController, this.callBackIndex})
+      {Key? key, required this.screenIndex, required this.iconAnimationController, required this.callBackIndex})
       : super(key: key);
 
   @override
@@ -14,7 +14,7 @@ class HomeDrawer extends StatefulWidget {
 }
 
 class _HomeDrawerState extends State<HomeDrawer> {
-  List<DrawerList> drawerList;
+  late List<DrawerList> drawerList;
   @override
   void initState() {
     setdDrawerListArray();
@@ -32,7 +32,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
         index: DrawerIndex.Help,
         labelName: 'Help',
         isAssetsImage: true,
-        imageName: "assets/images/supportIcon.png",
+        imageName: "assets/images/supportIcon.png", icon: Icon(Icons.help),
       ),
       DrawerList(
         index: DrawerIndex.FeedBack,
@@ -76,7 +76,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                 children: <Widget>[
                   AnimatedBuilder(
                     animation: widget.iconAnimationController,
-                    builder: (BuildContext context, Widget child) {
+                    builder: (BuildContext context, Widget? child) {
                       return new ScaleTransition(
                         scale: new AlwaysStoppedAnimation(
                             1.0 - (widget.iconAnimationController.value) * 0.2),
@@ -241,7 +241,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
             widget.screenIndex == listData.index
                 ? AnimatedBuilder(
                     animation: widget.iconAnimationController,
-                    builder: (BuildContext context, Widget child) {
+                    builder: (BuildContext context, Widget? child) {
                       return new Transform(
                         transform: new Matrix4.translationValues(
                             (MediaQuery.of(context).size.width * 0.75 - 64) *
@@ -302,8 +302,8 @@ class DrawerList {
   DrawerList({
     this.isAssetsImage = false,
     this.labelName = '',
-    this.icon,
-    this.index,
+    required this.icon,
+    required this.index,
     this.imageName = '',
   });
 }

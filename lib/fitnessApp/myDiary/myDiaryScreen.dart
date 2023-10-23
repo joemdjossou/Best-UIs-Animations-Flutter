@@ -10,16 +10,16 @@ import 'package:flutter/material.dart';
 class MyDiaryScreen extends StatefulWidget {
   final AnimationController animationController;
 
-  const MyDiaryScreen({Key key, this.animationController}) : super(key: key);
+  const MyDiaryScreen({Key? key, required this.animationController}) : super(key: key);
   @override
   _MyDiaryScreenState createState() => _MyDiaryScreenState();
 }
 
 class _MyDiaryScreenState extends State<MyDiaryScreen>
     with TickerProviderStateMixin {
-  Animation<double> topBarAnimation;
+  late Animation<double> topBarAnimation;
 
-  List<Widget> listViews = List<Widget>();
+  List<Widget> listViews = <Widget>[];
   var scrollController = ScrollController();
   double topBarOpacity = 0.0;
 
@@ -210,7 +210,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
       children: <Widget>[
         AnimatedBuilder(
           animation: widget.animationController,
-          builder: (BuildContext context, Widget child) {
+          builder: (BuildContext context, Widget? child) {
             return FadeTransition(
               opacity: topBarAnimation,
               child: new Transform(

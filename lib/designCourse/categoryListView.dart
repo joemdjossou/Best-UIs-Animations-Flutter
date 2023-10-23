@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 class CategoryListView extends StatefulWidget {
   final Function callBack;
 
-  const CategoryListView({Key key, this.callBack}) : super(key: key);
+  const CategoryListView({Key? key, required this.callBack}) : super(key: key);
   @override
   _CategoryListViewState createState() => _CategoryListViewState();
 }
 
 class _CategoryListViewState extends State<CategoryListView>
     with TickerProviderStateMixin {
-  AnimationController animationController;
+  late AnimationController animationController;
 
   @override
   void initState() {
@@ -78,20 +78,20 @@ class CategoryView extends StatelessWidget {
   final VoidCallback callback;
   final Category category;
   final AnimationController animationController;
-  final Animation animation;
+  final Animation<double> animation;
 
   const CategoryView(
-      {Key key,
-      this.category,
-      this.animationController,
-      this.animation,
-      this.callback})
+      {Key? key,
+      required this.category,
+      required this.animationController,
+      required this.animation,
+      required this.callback})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: animationController,
-      builder: (BuildContext context, Widget child) {
+      builder: (BuildContext context, Widget? child) {
         return FadeTransition(
           opacity: animation,
           child: new Transform(
@@ -130,7 +130,7 @@ class CategoryView extends StatelessWidget {
                                         children: <Widget>[
                                           Padding(
                                             padding:
-                                                const EdgeInsets.only(top: 16),
+                                                const EdgeInsets.only(top: 6),
                                             child: Text(
                                               category.title,
                                               textAlign: TextAlign.left,
